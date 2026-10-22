@@ -40,7 +40,7 @@ def check_night_time_power(df):
 
 def check_expected_hours(df, start_year = config.START_YEAR, end_year = config.END_YEAR):
     """Report if the number of hourly rows doesn't match the years requested
-    (think about leap years: 2020 has 366 days)."""
+    (leap years: 2020 has 366 days)."""
     expected_hours = len(pd.date_range(f"{start_year}-01-01", #turns the year 2019 into the date string "2019-01-01"
                                        f"{end_year}-12-31 23:00", #the last hour of the last day, with midnight we will be 23 hours short.
                                        freq="h")) #builds one timestamp per hour between these two dates (counting leap years)
