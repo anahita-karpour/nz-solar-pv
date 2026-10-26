@@ -33,33 +33,32 @@ def check_night_time_power(df):
         problems.append(f"{n_bad} hours where irradiance is zero but power output is not.")
     return problems
 
-# --- TODO: -------------------------------------------------------
-# Write these, add each one to CHECKS below, and write tests for them in
-# tests/test_validate.py (one test for "passes on clean data", one for
-# "catches the problem").
-
 def check_expected_hours(df, start_year = config.START_YEAR, end_year = config.END_YEAR):
     """Report if the number of hourly rows doesn't match the years requested
     (leap years: 2020 has 366 days)."""
     expected_hours = len(pd.date_range(f"{start_year}-01-01", #turns the year 2019 into the date string "2019-01-01"
-                                       f"{end_year}-12-31 23:00", #the last hour of the last day, with midnight we will be 23 hours short.
+                                       f"{end_year}-12-31 23:00", #the last hour of the last day, with midnight we will
+                                                                       # be 23 hours short.
                                        freq="h")) #builds one timestamp per hour between these two dates (counting leap years)
-                                                # len will return the number of hours
-    actual_hours = len(df) # number of rows we have
+
+    actual_hours = len(df)
     if actual_hours != expected_hours:
         return [f"expected {expected_hours} hourly rows for {start_year} - {end_year}, "
-                f"got {actual_hours}"] # both numbers in the message
+                f"got {actual_hours}"]
     return []
-
 
 def check_value_ranges(df):
     """Report physically impossible values, e.g. negative power or irradiance."""
-    raise NotImplementedError
+    problems = []
+    n_bad = int(((df["irradiance_wm2"] < 0) | (df["power_w"] < 0)).sum()) # with | you compare row by row
+    if n_bad:
+        problems.append(f"{n_bad} hours where irradiance or power is negative")
+    return problems
 
 
-
-# Checks that run automatically. Add yours here once they're written.
-CHECKS = [check_missing_values, check_duplicate_timestamps, check_night_time_power, check_expected_hours]
+# Checks that run automatically.
+CHECKS = [check_missing_values, check_duplicate_timestamps, check_night_time_power, check_expected_hours
+          , check_value_ranges]
 
 
 def run_all_checks(df):
