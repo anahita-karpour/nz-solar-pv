@@ -19,5 +19,3 @@ END_YEAR = 2023           # keep to years the chosen database covers
 PEAK_POWER_KW = 1.0       # modelled system size
 SYSTEM_LOSS_PCT = 14.0    # system losses assumed in the PV model
 RAD_DATABASE = "PVGIS-ERA5"  # global reanalysis data
-
-# print("Config has been run")
