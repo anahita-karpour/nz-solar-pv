@@ -1,7 +1,4 @@
-"""Fetch hourly PV data from the PVGIS API and turn it into a tidy Panda DataFrame.
-
-
-"""
+"""Fetch hourly PV data from the PVGIS API and turn it into a tidy Panda DataFrame."""
 import logging
 
 import pandas as pd
