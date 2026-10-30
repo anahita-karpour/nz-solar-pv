@@ -1,6 +1,6 @@
 # NZ Solar PV Pipeline
 
-![tests](https://github.com/anahita-karpour/nz-solar-pv/actions/workflows/ci.yml.svg)
+![tests](https://github.com/anahita-karpour/nz-solar-pv/actions/workflows/ci.yml/badge.svg)
 
 A small data pipeline that pulls modelled hourly solar PV output for several
 New Zealand locations from the EU's PVGIS service, validates it, and stores
